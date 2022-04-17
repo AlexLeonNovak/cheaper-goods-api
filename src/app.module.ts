@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
+import { ProductModule } from './modules/product/product.module';
+import { CategoriesModule } from './modules/categories/categories.module';
 
 console.log(process.env.NODE_ENV);
 
@@ -27,6 +29,8 @@ console.log(process.env.NODE_ENV);
     }),
     UserModule,
     AuthModule,
+    ProductModule,
+    CategoriesModule,
   ],
   providers: [AppService],
 })

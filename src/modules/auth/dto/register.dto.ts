@@ -10,18 +10,22 @@ import {
 } from 'class-validator';
 import { IsUserExistValidator } from '../../../validators/is-user-exist.validator';
 import { UserStatuses } from '../../../enums/user.enum';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class RegisterDto {
+  @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
   @IsAlphanumeric()
   public readonly firstName: string;
 
+  @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
   @IsAlphanumeric()
   public readonly lastName: string;
 
+  @ApiProperty()
   @IsNotEmpty()
   @Validate(IsUserExistValidator, {
     message: 'Email already exist',
@@ -29,6 +33,7 @@ export class RegisterDto {
   @IsEmail({}, { message: 'Email is not valid' })
   public readonly email: string;
 
+  @ApiProperty()
   @IsNotEmpty()
   @Validate(IsUserExistValidator, {
     message: 'Phone already exist',
@@ -38,6 +43,7 @@ export class RegisterDto {
   })
   public readonly phone: string;
 
+  @ApiProperty()
   @IsNotEmpty()
   @MinLength(8)
   @Matches(/[a-zA-Z]+/, {
@@ -54,6 +60,7 @@ export class RegisterDto {
   // })
   // public readonly confirmPassword: string;
 
+  @ApiProperty({ required: false })
   @IsOptional()
   public readonly status: UserStatuses;
 }

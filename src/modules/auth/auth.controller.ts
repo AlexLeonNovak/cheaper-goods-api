@@ -7,7 +7,10 @@ import { RegisterDto } from './dto/register.dto';
 import { JwtRefreshAuthGuard } from './jwt-refresh-auth.guard';
 import { COOKIE_REFRESH_TOKEN_KEY } from './jwt-refresh.strategy';
 import { UserEntity } from '../../entities/user.entity';
+import { ApiCreatedResponse, ApiNoContentResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { PayloadDto } from './dto/payload.dto';
 
+@ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
   private readonly cookieOptions: CookieOptions = {
@@ -18,6 +21,8 @@ export class AuthController {
 
   constructor(private authService: AuthService) {}
 
+  @ApiOperation({ summary: 'Login user' })
+  @ApiOkResponse({ type: PayloadDto })
   @Post('login')
   @UsePipes(ValidationPipe)
   @HttpCode(HttpStatus.OK)
@@ -27,6 +32,8 @@ export class AuthController {
     return payload;
   }
 
+  @ApiOperation({ summary: 'Register user' })
+  @ApiCreatedResponse({ type: PayloadDto })
   @Post('register')
   @UsePipes(ValidationPipe)
   async register(@Body() registerDto: RegisterDto, @Res({ passthrough: true }) response: Response) {
@@ -35,6 +42,8 @@ export class AuthController {
     return payload;
   }
 
+  @ApiOperation({ summary: 'Logout' })
+  @ApiNoContentResponse()
   @All('logout')
   @HttpCode(HttpStatus.NO_CONTENT)
   async logout(@Res({ passthrough: true }) response: Response, @Req() request: Request) {
@@ -44,6 +53,8 @@ export class AuthController {
     return;
   }
 
+  @ApiOperation({ summary: 'Refresh tokens' })
+  @ApiOkResponse({ type: PayloadDto })
   @All('refresh')
   @UseGuards(JwtRefreshAuthGuard)
   @HttpCode(HttpStatus.OK)
