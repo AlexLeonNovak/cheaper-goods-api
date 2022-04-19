@@ -17,12 +17,12 @@ export class CategoryEntity {
   @PrimaryGeneratedColumn({ unsigned: true })
   id: number;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => [CategoryDepends] })
   @ManyToMany(() => CategoryEntity, c => c[CategoryDependsKeys.SUB])
   @JoinTable()
   [CategoryDependsKeys.ROOTS]?: CategoryEntity[];
 
-  @ApiProperty()
+  @ApiProperty({ type: () => [CategoryDepends] })
   @ManyToMany(() => CategoryEntity, c => c[CategoryDependsKeys.ROOTS])
   [CategoryDependsKeys.SUB]?: CategoryEntity[];
 
@@ -34,11 +34,11 @@ export class CategoryEntity {
   @Column({ nullable: true })
   description: string;
 
-  @ApiProperty()
+  // @ApiProperty({ type: () => [ProductEntity] })
   @ManyToMany(() => ProductEntity)
   [CategoryDependsKeys.PRODUCTS]: ProductEntity[];
 
-  @ApiProperty()
+  @ApiProperty({ enum: CategoryStatus })
   @Column({ default: CategoryStatus.ACTIVE, length: 16 })
   status: CategoryStatus;
 
@@ -48,5 +48,25 @@ export class CategoryEntity {
 
   @ApiProperty()
   @UpdateDateColumn()
+  updatedAt: Date;
+}
+
+class CategoryDepends {
+  @ApiProperty()
+  id: number;
+
+  @ApiProperty()
+  name: string;
+
+  @ApiProperty()
+  description: string;
+
+  @ApiProperty({ enum: CategoryStatus })
+  status: CategoryStatus;
+
+  @ApiProperty()
+  createdAt: Date;
+
+  @ApiProperty()
   updatedAt: Date;
 }

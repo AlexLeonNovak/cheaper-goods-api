@@ -4,9 +4,9 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
-import { ProductModule } from './modules/product/product.module';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { MLIsAlphanumericValidator } from './validators/ml-is-alphanumeric.validator';
+import { ProductsModule } from './modules/products/products.module';
 
 @Module({
   imports: [
@@ -28,8 +28,8 @@ import { MLIsAlphanumericValidator } from './validators/ml-is-alphanumeric.valid
     }),
     UserModule,
     AuthModule,
-    ProductModule,
     CategoriesModule,
+    ProductsModule,
   ],
   providers: [AppService, MLIsAlphanumericValidator],
 })
