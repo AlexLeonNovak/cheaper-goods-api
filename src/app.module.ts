@@ -6,8 +6,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { ProductModule } from './modules/product/product.module';
 import { CategoriesModule } from './modules/categories/categories.module';
-
-console.log(process.env.NODE_ENV);
+import { MLIsAlphanumericValidator } from './validators/ml-is-alphanumeric.validator';
 
 @Module({
   imports: [
@@ -32,6 +31,6 @@ console.log(process.env.NODE_ENV);
     ProductModule,
     CategoriesModule,
   ],
-  providers: [AppService],
+  providers: [AppService, MLIsAlphanumericValidator],
 })
 export class AppModule {}

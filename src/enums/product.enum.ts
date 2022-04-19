@@ -3,3 +3,7 @@ export enum ProductStatus {
   INACTIVE = 'inactive',
   DELETED = 'deleted',
 }
+
+export enum ProductDependsKey {
+  CATEGORIES = 'categories',
+}

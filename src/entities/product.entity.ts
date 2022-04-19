@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { ProductStatus } from '../enums/product.enum';
+import { ProductDependsKey, ProductStatus } from '../enums/product.enum';
 import { CategoryEntity } from './category.entity';
 
 @Entity('products')
@@ -27,7 +27,7 @@ export class ProductEntity {
 
   @ManyToMany(() => CategoryEntity)
   @JoinTable()
-  categories: CategoryEntity[];
+  [ProductDependsKey.CATEGORIES]: CategoryEntity[];
 
   @ApiProperty()
   @Column({ default: ProductStatus.ACTIVE, length: 16 })

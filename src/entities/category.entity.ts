@@ -8,7 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { CategoryStatus } from '../enums/category.enum';
+import { CategoryDependsKeys, CategoryStatus } from '../enums/category.enum';
 import { ProductEntity } from './product.entity';
 
 @Entity('categories')
@@ -18,13 +18,13 @@ export class CategoryEntity {
   id: number;
 
   @ApiProperty()
-  @ManyToMany(() => CategoryEntity, c => c.children)
+  @ManyToMany(() => CategoryEntity, c => c[CategoryDependsKeys.SUB])
   @JoinTable()
-  parents?: CategoryEntity[];
+  [CategoryDependsKeys.ROOTS]?: CategoryEntity[];
 
   @ApiProperty()
-  @ManyToMany(() => CategoryEntity, c => c.parents)
-  children?: CategoryEntity[];
+  @ManyToMany(() => CategoryEntity, c => c[CategoryDependsKeys.ROOTS])
+  [CategoryDependsKeys.SUB]?: CategoryEntity[];
 
   @ApiProperty()
   @Column()
@@ -34,8 +34,9 @@ export class CategoryEntity {
   @Column({ nullable: true })
   description: string;
 
+  @ApiProperty()
   @ManyToMany(() => ProductEntity)
-  products: ProductEntity[];
+  [CategoryDependsKeys.PRODUCTS]: ProductEntity[];
 
   @ApiProperty()
   @Column({ default: CategoryStatus.ACTIVE, length: 16 })
