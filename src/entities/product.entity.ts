@@ -29,7 +29,7 @@ export class ProductEntity {
   @JoinTable()
   [ProductDependsKey.CATEGORIES]: CategoryEntity[];
 
-  @ApiProperty()
+  @ApiProperty({ enum: ProductStatus })
   @Column({ default: ProductStatus.ACTIVE, length: 16 })
   status: ProductStatus;
 

@@ -7,6 +7,8 @@ import { UserModule } from './modules/user/user.module';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { MLIsAlphanumericValidator } from './validators/ml-is-alphanumeric.validator';
 import { ProductsModule } from './modules/products/products.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { ResponseInterceptor } from './interceptors/response.interceptor';
 
 @Module({
   imports: [
@@ -31,6 +33,13 @@ import { ProductsModule } from './modules/products/products.module';
     CategoriesModule,
     ProductsModule,
   ],
-  providers: [AppService, MLIsAlphanumericValidator],
+  providers: [
+    AppService,
+    MLIsAlphanumericValidator,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseInterceptor,
+    },
+  ],
 })
 export class AppModule {}

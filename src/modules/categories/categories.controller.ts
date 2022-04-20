@@ -36,6 +36,7 @@ export class CategoriesController {
   @ApiOperation({ summary: 'Update category' })
   @ApiOkResponse({ type: CategoryEntity })
   @Patch(':id')
+  @UsePipes(ValidationPipe)
   update(@Param('id', ParseIntPipe) id: number, @Body() updateCategoryDto: UpdateCategoryDto) {
     return this.categoriesService.update(id, updateCategoryDto);
   }
