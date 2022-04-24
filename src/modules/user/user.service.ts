@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Not, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from '../../entities/user.entity';
-import { UserStatuses } from '../../enums/user.enum';
+import { UserEntity } from '../../common/entities/user.entity';
+import { UserStatuses } from '../../common/enums/user.enum';
 import { RegisterDto } from '../auth/dto/register.dto';
 import { PasswordService } from './password.service';
 import { UpdateUserDto } from './dto/update-user.dto';

@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JwtPayload } from './jwt.strategy';
-import { UserTokensEntity } from '../../entities/user-tokens.entity';
+import { UserTokensEntity } from '../../common/entities/user-tokens.entity';
 
 @Injectable()
 export class TokenService {

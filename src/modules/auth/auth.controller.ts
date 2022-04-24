@@ -1,12 +1,12 @@
 import { All, Body, Controller, HttpCode, HttpStatus, Post, Req, Res, UseGuards, UsePipes } from '@nestjs/common';
 import { CookieOptions, Request, Response } from 'express';
 import { LoginDto } from './dto/login.dto';
-import { ValidationPipe } from '../../pipes/validation.pipe';
+import { ValidationPipe } from '../../common/pipes/validation.pipe';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { JwtRefreshAuthGuard } from './jwt-refresh-auth.guard';
 import { COOKIE_REFRESH_TOKEN_KEY } from './jwt-refresh.strategy';
-import { UserEntity } from '../../entities/user.entity';
+import { UserEntity } from '../../common/entities/user.entity';
 import { ApiCreatedResponse, ApiNoContentResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { PayloadDto } from './dto/payload.dto';
 

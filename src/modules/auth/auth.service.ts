@@ -2,7 +2,7 @@ import { ForbiddenException, HttpException, HttpStatus, Injectable } from '@nest
 import { UserService } from '../user/user.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
-import { UserEntity } from '../../entities/user.entity';
+import { UserEntity } from '../../common/entities/user.entity';
 import { PasswordService } from '../user/password.service';
 import { TokenService } from './token.service';
 

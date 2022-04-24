@@ -8,8 +8,8 @@ import {
   MinLength,
   Validate,
 } from 'class-validator';
-import { IsUserExistValidator } from '../../../validators/is-user-exist.validator';
-import { UserStatuses } from '../../../enums/user.enum';
+import { IsUserExistValidator } from '../../../common/validators/is-user-exist.validator';
+import { UserStatuses } from '../../../common/enums/user.enum';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class RegisterDto {

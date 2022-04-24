@@ -1,22 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 import { ProductDependsKey, ProductStatus } from '../enums/product.enum';
 import { CategoryEntity } from './category.entity';
+import { BaseEntity } from './base.entity';
 
 @Entity('products')
-export class ProductEntity {
-  @ApiProperty()
-  @PrimaryGeneratedColumn({ unsigned: true })
-  id: number;
-
+export class ProductEntity extends BaseEntity {
   @ApiProperty()
   @Column()
   name: string;
@@ -32,12 +21,4 @@ export class ProductEntity {
   @ApiProperty({ enum: ProductStatus })
   @Column({ default: ProductStatus.ACTIVE, length: 16 })
   status: ProductStatus;
-
-  @ApiProperty()
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @ApiProperty()
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

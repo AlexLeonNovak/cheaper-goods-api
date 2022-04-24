@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { ArrayNotEmpty, IsArray, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { Transform } from 'class-transformer';
 import * as sanitizeHtml from 'sanitize-html';
-import { ProductStatus } from '../../../enums/product.enum';
+import { ProductStatus } from '../../../common/enums/product.enum';
 
 export class CreateProductDto {
   @ApiProperty({ required: true })

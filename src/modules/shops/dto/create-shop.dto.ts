@@ -1,10 +1,10 @@
-import { IsArray, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import * as sanitizeHtml from 'sanitize-html';
-import { CategoryStatus } from '../../../common/enums/category.enum';
-import { Transform } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsArray, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { Transform } from 'class-transformer';
+import * as sanitizeHtml from 'sanitize-html';
+import { ShopStatus } from '../../../common/enums/shop.enum';
 
-export class CreateCategoryDto {
+export class CreateShopDto {
   @ApiProperty({ required: true })
   @IsString()
   @IsNotEmpty()
@@ -20,10 +20,10 @@ export class CreateCategoryDto {
   @ApiProperty({ required: false, type: [Number] })
   @IsOptional()
   @IsArray()
-  public readonly roots?: number[];
+  public readonly addresses?: number[];
 
-  @ApiProperty({ required: false, default: CategoryStatus.ACTIVE, enum: CategoryStatus })
+  @ApiProperty({ required: false, default: ShopStatus.ACTIVE, enum: ShopStatus })
   @IsOptional()
-  @IsEnum(CategoryStatus, { each: true, message: 'Status not correct' })
-  public readonly status?: CategoryStatus = CategoryStatus.ACTIVE;
+  @IsEnum(ShopStatus, { each: true, message: 'Status not correct' })
+  public readonly status?: ShopStatus = ShopStatus.ACTIVE;
 }

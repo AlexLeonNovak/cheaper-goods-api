@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, UseGuards, UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
-import { ValidationPipe } from '../../pipes/validation.pipe';
+import { ValidationPipe } from '../../common/pipes/validation.pipe';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
 // import { Roles } from '../roles/roles.decorator';

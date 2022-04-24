@@ -8,7 +8,7 @@ import { JwtStrategy } from './jwt.strategy';
 import { TokenService } from './token.service';
 import { JwtRefreshStrategy } from './jwt-refresh.strategy';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserTokensEntity } from '../../entities/user-tokens.entity';
+import { UserTokensEntity } from '../../common/entities/user-tokens.entity';
 import { PassportModule } from '@nestjs/passport';
 
 @Module({

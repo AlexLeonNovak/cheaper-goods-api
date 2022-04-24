@@ -1,6 +1,6 @@
 import { IsEnum, IsOptional, IsString, Matches, MinLength, ValidateIf } from 'class-validator';
-import { Match } from '../../../decorators/match.decorator';
-import { UserStatuses } from '../../../enums/user.enum';
+import { Match } from '../../../common/decorators/match.decorator';
+import { UserStatuses } from '../../../common/enums/user.enum';
 
 export class UpdateUserDto {
   @IsString()

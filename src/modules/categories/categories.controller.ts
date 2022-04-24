@@ -2,9 +2,9 @@ import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UsePip
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { ValidationPipe } from '../../pipes/validation.pipe';
+import { ValidationPipe } from '../../common/pipes/validation.pipe';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { CategoryEntity } from '../../entities/category.entity';
+import { CategoryEntity } from '../../common/entities/category.entity';
 
 @ApiTags('Categories')
 @Controller('categories')

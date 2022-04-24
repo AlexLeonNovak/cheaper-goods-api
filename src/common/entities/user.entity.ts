@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { UserStatuses } from '../enums/user.enum';
 import { ApiProperty } from '@nestjs/swagger';
@@ -45,6 +45,9 @@ export class UserEntity {
   @ApiProperty()
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 
   // @OneToMany(() => WalletsUsers, (walletsUsers) => walletsUsers.user)
   // userWallets: WalletsUsers[];

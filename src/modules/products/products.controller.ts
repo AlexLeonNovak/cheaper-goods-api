@@ -3,8 +3,8 @@ import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { ProductEntity } from '../../entities/product.entity';
-import { ValidationPipe } from '../../pipes/validation.pipe';
+import { ProductEntity } from '../../common/entities/product.entity';
+import { ValidationPipe } from '../../common/pipes/validation.pipe';
 
 @ApiTags('Products')
 @Controller('products')
@@ -41,10 +41,10 @@ export class ProductsController {
     return this.productsService.update(id, updateProductDto);
   }
 
-  @ApiOperation({ summary: 'Update product' })
+  @ApiOperation({ summary: 'Delete product' })
   @ApiOkResponse({ type: ProductEntity })
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
-    return this.productsService.remove(+id);
+    return this.productsService.remove(id);
   }
 }
