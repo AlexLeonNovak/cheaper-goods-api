@@ -11,6 +11,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
 import { ProductsModule } from './modules/products/products.module';
 import { ShopAddressesModule } from './modules/shop-addresses/shop-addresses.module';
 import { ShopsModule } from './modules/shops/shops.module';
+import { PricesModule } from './modules/prices/prices.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { ShopsModule } from './modules/shops/shops.module';
     ProductsModule,
     ShopsModule,
     ShopAddressesModule,
+    PricesModule,
   ],
   providers: [
     AppService,

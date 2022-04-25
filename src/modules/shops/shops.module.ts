@@ -8,7 +8,7 @@ import { ShopAddressesModule } from '../shop-addresses/shop-addresses.module';
 @Module({
   controllers: [ShopsController],
   imports: [TypeOrmModule.forFeature([ShopEntity]), ShopAddressesModule],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, ShopsService],
   providers: [ShopsService],
 })
 export class ShopsModule {}
