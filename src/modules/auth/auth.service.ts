@@ -1,4 +1,4 @@
-import { ForbiddenException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
@@ -16,8 +16,7 @@ export class AuthService {
 
   private async validate({ email, password }: LoginDto): Promise<UserEntity | null> {
     const user = await this.userService.getByEmail(email);
-
-    const passwordEquals = await this.passwordService.compare(password, user.passwordHash);
+    const passwordEquals = user && (await this.passwordService.compare(password, user.passwordHash));
     if (user && passwordEquals) {
       return user;
     }
@@ -27,7 +26,7 @@ export class AuthService {
   async login(loginDto: LoginDto) {
     const user = await this.validate(loginDto);
     if (!user) {
-      throw new HttpException('Wrong email or password', HttpStatus.BAD_REQUEST);
+      throw new BadRequestException('Wrong email or password');
     }
 
     if (!user.isActive()) {
@@ -40,7 +39,7 @@ export class AuthService {
   async register(registerDto: RegisterDto) {
     const candidate = await this.userService.getByEmail(registerDto.email);
     if (candidate) {
-      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+      throw new BadRequestException('User already exists');
     }
 
     const user = await this.userService.create(registerDto);

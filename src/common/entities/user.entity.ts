@@ -46,6 +46,7 @@ export class UserEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
+  @Exclude({ toPlainOnly: true })
   @DeleteDateColumn()
   deletedAt: Date;
 

@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 
 export class ValidationException extends HttpException {
-  messages;
+  details;
 
-  constructor(messages) {
-    super(messages, HttpStatus.UNPROCESSABLE_ENTITY);
-    this.messages = messages;
+  constructor(details) {
+    super('Some of the fields have invalid values', HttpStatus.UNPROCESSABLE_ENTITY);
+    this.details = details;
   }
 }

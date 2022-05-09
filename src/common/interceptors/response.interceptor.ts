@@ -7,14 +7,14 @@ import { ServerResponse } from 'http';
 export class ResponseInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> | Promise<Observable<any>> {
     return next.handle().pipe(
-      map(data => {
-        const { statusCode: code, statusMessage: messages } = context.switchToHttp().getResponse<ServerResponse>();
+      map(result => {
+        const { statusCode: code, statusMessage: message } = context.switchToHttp().getResponse<ServerResponse>();
         const status = code === 500 ? 'fail' : 'success';
         return {
           code,
           status,
-          data,
-          ...(messages ? { messages } : {}),
+          result,
+          ...(message ? { message } : {}),
         };
       }),
     );

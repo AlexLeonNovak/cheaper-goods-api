@@ -12,6 +12,7 @@ import { ProductsModule } from './modules/products/products.module';
 import { ShopAddressesModule } from './modules/shop-addresses/shop-addresses.module';
 import { ShopsModule } from './modules/shops/shops.module';
 import { PricesModule } from './modules/prices/prices.module';
+import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 
 @Module({
   imports: [
@@ -45,6 +46,10 @@ import { PricesModule } from './modules/prices/prices.module';
     {
       provide: APP_INTERCEPTOR,
       useClass: ResponseInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformInterceptor,
     },
   ],
 })
