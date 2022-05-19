@@ -5,7 +5,7 @@ export enum CategoryStatus {
 }
 
 export enum CategoryDependsKeys {
-  ROOTS = 'rootCategories',
+  ROOT = 'rootCategory',
   SUB = 'subcategories',
   PRODUCTS = 'products',
 }

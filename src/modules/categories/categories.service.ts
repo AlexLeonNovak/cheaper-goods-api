@@ -14,26 +14,26 @@ export class CategoriesService {
   ) {}
 
   async create(createCategoryDto: CreateCategoryDto) {
-    let roots: CategoryEntity[] = [];
-    if (createCategoryDto.roots) {
-      roots = await this.categoryRepo.findByIds(createCategoryDto.roots);
+    let root: CategoryEntity = null;
+    if (createCategoryDto.root) {
+      root = await this.categoryRepo.findOne({ id: createCategoryDto.root });
     }
     return await this.categoryRepo.save({
       ...createCategoryDto,
-      [CategoryDependsKeys.ROOTS]: roots,
+      [CategoryDependsKeys.ROOT]: root,
     });
   }
 
   findAll() {
     return this.categoryRepo.find({
-      relations: [CategoryDependsKeys.ROOTS, CategoryDependsKeys.SUB],
+      relations: [CategoryDependsKeys.ROOT, CategoryDependsKeys.SUB],
     });
   }
 
   async findOne(id: number) {
     const category = await this.categoryRepo.findOne({
       where: { id },
-      relations: [CategoryDependsKeys.ROOTS, CategoryDependsKeys.SUB],
+      relations: [CategoryDependsKeys.ROOT, CategoryDependsKeys.SUB],
     });
     if (!category) {
       throw new NotFoundException('Category not found');
@@ -43,15 +43,14 @@ export class CategoriesService {
 
   async update(id: number, updateCategoryDto: UpdateCategoryDto) {
     const category = await this.findOne(id);
-    let roots = category[CategoryDependsKeys.ROOTS] || [];
-    if (updateCategoryDto.roots) {
-      const newRoots = await this.categoryRepo.findByIds(updateCategoryDto.roots);
-      roots = [...newRoots, ...roots];
+    let root = category[CategoryDependsKeys.ROOT] || null;
+    if (updateCategoryDto.root) {
+      root = await this.categoryRepo.findOne({ id: updateCategoryDto.root });
     }
     const updatedCategory = await this.categoryRepo.create({
       ...category,
       ...updateCategoryDto,
-      [CategoryDependsKeys.ROOTS]: roots,
+      [CategoryDependsKeys.ROOT]: root,
     });
     return this.categoryRepo.save(updatedCategory);
   }

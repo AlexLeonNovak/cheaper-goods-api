@@ -28,7 +28,7 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
         username: config.get('PGDB_USER'),
         password: config.get('PGDB_PASS'),
         entities: [__dirname + '/entities/*.entity{.ts,.js}'],
-        synchronize: config.get('NODE_ENV') === 'development',
+        synchronize: true, //config.get('NODE_ENV') === 'development',
         autoLoadEntities: true,
       }),
     }),

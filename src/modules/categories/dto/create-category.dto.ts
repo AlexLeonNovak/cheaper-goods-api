@@ -1,4 +1,4 @@
-import { IsArray, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import * as sanitizeHtml from 'sanitize-html';
 import { CategoryStatus } from '../../../common/enums/category.enum';
 import { Transform } from 'class-transformer';
@@ -17,10 +17,9 @@ export class CreateCategoryDto {
   @Transform(({ value }) => sanitizeHtml(value))
   public readonly description?: string;
 
-  @ApiProperty({ required: false, type: [Number] })
+  @ApiProperty({ required: false, type: Number })
   @IsOptional()
-  @IsArray()
-  public readonly roots?: number[];
+  public readonly root?: number;
 
   @ApiProperty({ required: false, default: CategoryStatus.ACTIVE, enum: CategoryStatus })
   @IsOptional()

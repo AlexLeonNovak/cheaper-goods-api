@@ -1,19 +1,25 @@
-import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { CategoryDependsKeys, CategoryStatus } from '../enums/category.enum';
-import { ProductEntity } from './product.entity';
+import { CategoryStatus } from '../enums/category.enum';
 import { BaseEntity } from './base.entity';
 
 @Entity('categories')
 export class CategoryEntity extends BaseEntity {
-  @ApiProperty({ type: () => [CategoryDepends] })
-  @ManyToMany(() => CategoryEntity, c => c[CategoryDependsKeys.SUB])
-  @JoinTable()
-  [CategoryDependsKeys.ROOTS]?: CategoryEntity[];
+  @ApiProperty({ type: () => CategoryDepends })
+  @ManyToOne(() => CategoryEntity, c => c.subcategories, {
+    onDelete: 'CASCADE',
+    nullable: true,
+  })
+  @JoinColumn()
+  rootCategory?: CategoryEntity;
 
   @ApiProperty({ type: () => [CategoryDepends] })
-  @ManyToMany(() => CategoryEntity, c => c[CategoryDependsKeys.ROOTS])
-  [CategoryDependsKeys.SUB]?: CategoryEntity[];
+  @OneToMany(() => CategoryEntity, c => c.rootCategory)
+  subcategories?: CategoryEntity[];
+
+  // @Column({ nullable: true })
+  // @Index()
+  // rootCategoryId?: number;
 
   @ApiProperty()
   @Column()
@@ -24,8 +30,8 @@ export class CategoryEntity extends BaseEntity {
   description: string;
 
   // @ApiProperty({ type: () => [ProductEntity] })
-  @ManyToMany(() => ProductEntity)
-  [CategoryDependsKeys.PRODUCTS]: ProductEntity[];
+  // @ManyToMany(() => ProductEntity)
+  // [CategoryDependsKeys.PRODUCTS]: ProductEntity[];
 
   @ApiProperty({ enum: CategoryStatus })
   @Column({ default: CategoryStatus.ACTIVE, length: 16 })
