@@ -30,7 +30,7 @@ export class AuthService {
     }
 
     if (!user.isActive()) {
-      throw new ForbiddenException();
+      throw new ForbiddenException('Account is not active');
     }
 
     return this.userData(user);

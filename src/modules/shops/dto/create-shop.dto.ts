@@ -20,7 +20,7 @@ export class CreateShopDto {
   @ApiProperty({ required: false, type: [Number] })
   @IsOptional()
   @IsArray()
-  public readonly addresses?: number[];
+  public readonly addressIds?: number[];
 
   @ApiProperty({ required: false, default: ShopStatus.ACTIVE, enum: ShopStatus })
   @IsOptional()

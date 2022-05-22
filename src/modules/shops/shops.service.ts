@@ -16,7 +16,7 @@ export class ShopsService {
   ) {}
 
   async create(createShopDto: CreateShopDto) {
-    const { addresses: addressIds, name, description, status } = createShopDto;
+    const { addressIds, name, description, status } = createShopDto;
     const addresses = await this.addressService.repo.findByIds(addressIds);
     if (!addresses.length) {
       throw new NotFoundException('Addresses not found');
@@ -42,7 +42,7 @@ export class ShopsService {
   }
 
   async update(id: number, updateShopDto: UpdateShopDto) {
-    const { addresses: addressIds, status, name, description } = updateShopDto;
+    const { addressIds, status, name, description } = updateShopDto;
     const addresses = await this.addressService.repo.findByIds(addressIds);
     if (!addresses.length) {
       throw new NotFoundException('Addresses not found');
