@@ -2,7 +2,9 @@ version: "3"
 services:
     postgres:
         container_name: postgres
-        image: postgres:latest
+        build:
+            context: ./docker
+            dockerfile: postgres.Dockerfile
         ports:
             - "5432:5432"
         volumes:

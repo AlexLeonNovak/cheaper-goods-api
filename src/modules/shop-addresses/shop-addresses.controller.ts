@@ -6,6 +6,7 @@ import {
   Get,
   Param,
   ParseBoolPipe,
+  ParseFloatPipe,
   ParseIntPipe,
   Patch,
   Post,
@@ -51,6 +52,13 @@ export class ShopAddressesController {
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.shopService.findOne(id);
+  }
+
+  @ApiOperation({ summary: 'Get shop address by latitude and longitude' })
+  @ApiOkResponse({ type: ShopAddressEntity })
+  @Get(':lat,:lng')
+  findByLatLng(@Param('lat', ParseFloatPipe) lat: number, @Param('lng', ParseFloatPipe) lng: number) {
+    return this.shopService.findByLatLng({ lat, lng });
   }
 
   @ApiOperation({ summary: 'Update shop address' })

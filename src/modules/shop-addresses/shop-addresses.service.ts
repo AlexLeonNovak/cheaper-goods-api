@@ -55,8 +55,16 @@ export class ShopAddressesService {
   }
 
   async findOne(id: number, withDeleted = false) {
+    return await this.findByCondition({ id }, withDeleted);
+  }
+
+  async findByLatLng({ lat, lng }) {
+    return await this.findByCondition({ lat, lng });
+  }
+
+  private async findByCondition(condition, withDeleted = false) {
     const address = await this.addressRepo.findOne(
-      id,
+      condition,
       !withDeleted && { where: { status: Not(ShopAddressStatus.DELETED) } },
     );
     if (!address) {
